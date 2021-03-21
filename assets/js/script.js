@@ -41,6 +41,7 @@ var timeSet = 0;
 // Quiz logic
 var begin = function() {
     quiz.innerHTML = "";
+    optionMaker.innerHTML = "";
     for (var i = 0; i < questions.length; i++) {
         var currentQuestion = questions[qIndex].question;
         var currentOptions = questions[qIndex].options;
@@ -51,9 +52,38 @@ var begin = function() {
         option.textContent = choice;
         quiz.appendChild(optionMaker);
         optionMaker.appendChild(option);
+        option.addEventListener("click", (grader));
     })
 };
 
+var grader = function(event) {
+    var chosen = event.target;
+    
+    if (chosen.matches("li")) {
+        var info = document.createElement("div");
+        info.setAttribute("id", "info");
+
+        if (chosen.textContent === questions[qIndex].answer) {
+            info.textContent = "🤘Nailed It!🤘";
+        }
+        else {
+            timeRemaining = timeRemaining - wrong;
+            info.textContent = "👎Nope. Say goodbye to 10 seconds off the timer!👎";
+        }
+    }
+
+    qIndex++;
+
+    if (qIndex >= questions.length) {
+        // endGame();
+    }
+    else {
+        begin(qIndex);
+    }
+    quiz.appendChild(info);
+}
+
+var endGame = function () {}
 
 // Timer & quiz start
 quizBtn.addEventListener("click", function() {
