@@ -38,4 +38,7 @@ li {
 
 #hiscore {
     font-size: large;
+    text-decoration: none;
+    color: white;
+    text-decoration: underline;
 }

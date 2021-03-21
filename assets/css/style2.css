@@ -1,0 +1,30 @@
+#leaderboard {
+    background-color: cadetblue;
+    border: 2px double black;
+    text-align: center;
+}
+
+#return {
+    text-decoration: none;
+    color:darkred;
+    font-size: larger;
+    font-size: xx-large;
+}
+
+h1 {
+    text-align: center;
+    font-size: 60px;
+    color: darkred;
+}
+
+li {
+    list-style-type: none;
+    background-color: darkred;
+    font-size: xx-large;
+    color: grey;
+}
+
+li:nth-child(odd) {
+    background-color: grey;
+    color: darkred;
+}
