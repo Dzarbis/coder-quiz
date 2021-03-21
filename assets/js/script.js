@@ -124,6 +124,15 @@ var endGame = function () {
 
     quiz.appendChild(initialBtn);
 
+    var br = document.createElement("br");
+    quiz.appendChild(br);
+    
+    var mover = document.createElement("a");
+    mover.setAttribute("href", "./assets/hiscores/hiscores.html");
+    mover.setAttribute("id", "link");
+    mover.textContent = "See the leaderboard!";
+    quiz.appendChild(mover);
+
     initialBtn.addEventListener("click", function() {
         var initials = initialInput.value;
 
@@ -138,6 +147,9 @@ var endGame = function () {
                 initials: initials,
                 score: playerScore
             }
+            
+            initialInput.value = "";
+
             var highScores = localStorage.getItem("highScores");
             if (!highScores) {
                 highScores = [];
@@ -147,7 +159,7 @@ var endGame = function () {
             }
             highScores.push(final);
             var refreshScores = JSON.stringify(highScores);
-            localStorage.setItem("highScores", refreshScores)
+            localStorage.setItem("highScores", refreshScores);
         }
     });
 }

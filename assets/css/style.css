@@ -42,3 +42,13 @@ li {
     color: white;
     text-decoration: underline;
 }
+
+#initialBtn {
+    background-color: green;
+    border-radius: 5px;
+}
+
+#link {
+    text-decoration: none;
+    color: white;
+}
