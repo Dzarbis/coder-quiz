@@ -1,3 +1,4 @@
+// Stored questions
 var questions = [
     {
         question: "A boolean is ____?",
@@ -25,3 +26,47 @@ var questions = [
         answer: "||"
     }
 ];
+
+// Set variables here
+var main = document.querySelector("#main");
+var timer = document.querySelector("#timer");
+var quiz = document.querySelector("#quiz");
+var quizBtn = document.querySelector("#quiz-button");
+var optionMaker = document.createElement("ul");
+var timeRemaining = 60;
+var wrong = 10;
+var qIndex = 0;
+var timeSet = 0;
+
+// Quiz logic
+var begin = function() {
+    quiz.innerHTML = "";
+    for (var i = 0; i < questions.length; i++) {
+        var currentQuestion = questions[qIndex].question;
+        var currentOptions = questions[qIndex].options;
+        quiz.textContent = currentQuestion;
+    }
+    currentOptions.forEach(function(choice) {
+        var option = document.createElement("li");
+        option.textContent = choice;
+        quiz.appendChild(optionMaker);
+        optionMaker.appendChild(option);
+    })
+};
+
+
+// Timer & quiz start
+quizBtn.addEventListener("click", function() {
+    if (timeSet === 0) {
+        timeSet = setInterval(function() {
+            timeRemaining--;
+            timer.textContent = "Time Left: " + timeRemaining;
+
+            if (timeRemaining <= 0) {
+                clearInterval(timeSet);
+                timer.textContent = "Out of time!";
+            }
+        }, 1000);
+    }
+    begin();
+})
