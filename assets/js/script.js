@@ -75,15 +75,82 @@ var grader = function(event) {
     qIndex++;
 
     if (qIndex >= questions.length) {
-        // endGame();
+        endGame();
     }
     else {
         begin(qIndex);
     }
     quiz.appendChild(info);
-}
+};
 
-var endGame = function () {}
+var endGame = function () {
+    quiz.innerHTML = "";
+    timer.innerHTML = "";
+
+    var endTitle = document.createElement("h1");
+    endTitle.setAttribute("id", "endTitle");
+    endTitle.textContent = "Game Over, Man, Game Over!!!";
+
+    quiz.appendChild(endTitle);
+
+    var scoreboard = document.createElement("p");
+    scoreboard.setAttribute("id", "scoreboard");
+
+    if (timeRemaining >= 0) {
+        var playerScore = timeRemaining;
+        scoreboard.textContent = "You reached a score of: " + playerScore + "!";
+        quiz.appendChild(scoreboard);
+        clearInterval(timeSet);
+    }
+
+    // High score logic
+    var initialPrompt = document.createElement("label");
+    initialPrompt.setAttribute("id", "initialPrompt");
+    initialPrompt.textContent = "Enter your initials to save your score: ";
+
+    quiz.appendChild(initialPrompt);
+
+    var initialInput = document.createElement("input");
+    initialInput.setAttribute("type", "text");
+    initialInput.setAttribute("id", "initialInput");
+    initialInput.textContent = "";
+
+    quiz.appendChild(initialInput);
+
+    var initialBtn = document.createElement("button");
+    initialBtn.setAttribute("type", "submit");
+    initialBtn.setAttribute("id", "initialBtn");
+    initialBtn.textContent = "Save";
+
+    quiz.appendChild(initialBtn);
+
+    initialBtn.addEventListener("click", function() {
+        var initials = initialInput.value;
+
+        if (!initials) {
+            window.alert("Please enter your intials!");
+        }
+        else if (initials === "your initials") {
+            window.alert("Ha.... Hilarious... 🙄");
+        }
+        else {
+            var final = {
+                initials: initials,
+                score: playerScore
+            }
+            var highScores = localStorage.getItem("highScores");
+            if (!highScores) {
+                highScores = [];
+            }
+            else {
+                highScores = JSON.parse(highScores);
+            }
+            highScores.push(final);
+            var refreshScores = JSON.stringify(highScores);
+            localStorage.setItem("highScores", refreshScores)
+        }
+    });
+}
 
 // Timer & quiz start
 quizBtn.addEventListener("click", function() {
@@ -95,8 +162,9 @@ quizBtn.addEventListener("click", function() {
             if (timeRemaining <= 0) {
                 clearInterval(timeSet);
                 timer.textContent = "Out of time!";
+                endGame();
             }
         }, 1000);
     }
-    begin();
+    begin(qIndex);
 })

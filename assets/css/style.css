@@ -1,0 +1,41 @@
+ul {
+    text-align: center;
+    font-size: xx-large;
+}
+
+#main {
+    border: 2px double black;
+    text-align: center;
+    font-size: xx-large;
+    font-weight: bold;
+    color: darkred;
+    background-color: cadetblue;
+    margin-top: 200px;
+}
+
+li {
+    width: 88%;
+    background-color: darkblue;
+    padding: 10px 10px;
+    margin-top: 5px;
+    list-style-type: none;
+    color: darkorange;
+    font-size: xx-large;
+    text-align: center;
+    font-weight: normal;
+}
+
+#timer {
+    float: right;
+}
+
+#quiz-button {
+    border-radius: 5px;
+    background-color: green;
+    color: black;
+    font-size: 50px;
+}
+
+#hiscore {
+    font-size: large;
+}
